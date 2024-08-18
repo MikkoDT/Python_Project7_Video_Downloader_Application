@@ -6,9 +6,12 @@ from moviepy.editor import *
 def download():
     video_path = url_entry.get()
     file_path = path_label.cget("text")
-    mp4 =  YouTube(video_path).streams.get_highest_resolution().download()
-    video_clip = VideoFileClip(mp4)
-    video_clip.close()
+    print('file_pat: ',file_path)
+    #mp4 =  YouTube(video_path).streams.get_highest_resolution().download()
+    #video_clip = VideoFileClip(mp4)
+    #video_clip.close()
+    select = YouTube(video_path).streams.filter(progressive=True,file_extension='mp4').last()
+    mp4 = select.download(file_path)
 
 def get_path():
     path = filedialog.askdirectory()
